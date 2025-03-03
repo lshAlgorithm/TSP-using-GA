@@ -73,6 +73,7 @@ def geneticAlgorithm(
 
         for i in range(int((len(population) - 2) / 2)):
             # CROSSOVER
+            # Parents have two children, each inherit the gene partly(separated by point)
             random_number = random.random()
             if random_number < CROSSOVER_RATE:
                 parent_chromosome1 = sorted(
@@ -100,7 +101,7 @@ def geneticAlgorithm(
                 child_chromosome1 = random.choices(population)[0][1]
                 child_chromosome2 = random.choices(population)[0][1]
 
-            # MUTATION
+            # MUTATION by swaping.
             if random.random() < MUTATION_RATE:
                 point1 = random.randint(0, lenCities - 1)
                 point2 = random.randint(0, lenCities - 1)
@@ -120,6 +121,8 @@ def geneticAlgorithm(
             new_population.append([calcDistance(child_chromosome2), child_chromosome2])
 
         population = new_population
+
+        print(f'Iter: {gen_number}, Score: {sorted(population)[0][0]}')
 
         gen_number += 1
 
